@@ -18,13 +18,12 @@ const setUnitPosition = (unit: IUnit, position: Position, ctx: GameBoardContext)
 export const createMoveUnit = (ctx: GameBoardContext) => {
   const getUnit = createGetUnit(ctx);
 
-  return (unit: IUnit, newPosition: Position): boolean => {
+  return (unit: IUnit, newPosition: Position): void => {
     if (!unit.position || getUnit(newPosition) !== null) {
-      return false;
+      return;
     }
 
     clearUnitFromPosition(unit, ctx);
     setUnitPosition(unit, newPosition, ctx);
-    return true;
   };
 };

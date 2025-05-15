@@ -1,6 +1,5 @@
-import { IUnit } from '../../types';
+import { IUnit, UnitContext } from '../../types';
 import { GameEngineContext } from '../../../game-engine/types';
-import { UnitContext } from '../types';
 
 export const createHandleDeath = ({ state }: UnitContext) => {
   return (ctx: GameEngineContext): void => {

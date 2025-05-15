@@ -20,9 +20,9 @@ export type GameBoardContext = {
 
 export type GameBoardService = {
   getUnit: (position: Position) => IUnit | null;
-  placeUnit: (unit: IUnit, position: Position) => boolean;
-  moveUnit: (unit: IUnit, position: Position) => boolean;
-  removeUnit: (unit: IUnit) => boolean;
+  placeUnit: (unit: IUnit, position: Position) => void;
+  moveUnit: (unit: IUnit, position: Position) => void;
+  removeUnit: (unit: IUnit) => void;
   getUnitsInRange: (from: Position, range: number) => IUnit[];
   getRandomEmptyPosition: (from?: Position, range?: number) => Position | null;
   getAllUnits: () => IUnit[];
