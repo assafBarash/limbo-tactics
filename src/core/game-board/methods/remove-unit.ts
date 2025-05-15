@@ -1,4 +1,4 @@
-import { Unit } from '../../unit/types';
+import { Unit } from '../../units/types';
 import { GameBoardContext } from '../types';
 import { createGetUnit } from './get-unit';
 

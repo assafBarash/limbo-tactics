@@ -1,9 +1,9 @@
 export * from './types';
 
-import knightData from './units/knight.json';
-import archerData from './units/archer.json';
+import knightData from './data/knight.json';
+import archerData from './data/archer.json';
 import { UnitType, UnitData } from './types';
-import { createUnit as createUnitBase } from './instance/service';
+import { createUnit as createUnitBase } from './unit/service';
 
 const unitData: Record<UnitType, UnitData> = {
   knight: knightData as UnitData,

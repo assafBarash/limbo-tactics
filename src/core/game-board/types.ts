@@ -1,4 +1,4 @@
-import { Unit } from '../unit/types';
+import { Unit } from '../units/types';
 
 export type Position = {
   x: number;

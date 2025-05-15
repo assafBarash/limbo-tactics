@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { GameEngine } from './core/game-engine/service';
 import { GameBoard } from './core/game-board/service';
-import { Army, UnitType, Unit } from './core/unit/types';
+import { Army, UnitType, Unit } from './core/units/types';
 import { Position } from './core/game-board/types';
-import { createUnit } from './core/unit';
+import { createUnit } from './core/units';
 
 // Army factory
 export const createArmy = (unitTypes: UnitType[]): Army => {

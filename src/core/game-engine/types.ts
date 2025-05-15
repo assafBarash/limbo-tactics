@@ -1,4 +1,4 @@
-import { Unit, Action, Army } from '../unit/types';
+import { Unit, Action, Army } from '../units/types';
 import { Position, Grid } from '../game-board/types';
 import { GameBoardService } from '../game-board/types';
 

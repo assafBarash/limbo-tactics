@@ -1,4 +1,4 @@
-import { Unit } from '../unit/types';
+import { Unit } from '../units/types';
 import { Position, Grid, BoardDimensions, GameBoardContext, GameBoardService } from './types';
 import { createGetUnit } from './methods/get-unit';
 import { createPlaceUnit } from './methods/place-unit';
