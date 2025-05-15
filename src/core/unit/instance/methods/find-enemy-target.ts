@@ -1,0 +1,10 @@
+import { Unit } from '../../types';
+import { UnitContext } from '../types';
+
+export const createFindEnemyTarget = ({ state }: UnitContext) => {
+  return (targets: Unit[]): Unit | null => 
+    targets.find(target => 
+      target.id !== state.id && 
+      target.armyId !== state.armyId
+    ) ?? null;
+}; 
