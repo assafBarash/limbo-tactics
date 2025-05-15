@@ -27,9 +27,10 @@ const game = GameEngine({
   listeners: {
     onUnitAction: ({ unit, action, target }) => {
       const targetDesc = (target as Unit).id ? `unit ${(target as Unit).id}` : `position (${(target as Position).x}, ${(target as Position).y})`;
-      console.log(`Unit ${unit.id} used ${action.type} on ${targetDesc}`);
+      // console.log(`Unit ${unit.id} used ${action.type} on ${targetDesc}`);
     },
     onTickEnd: ({ armies, board, turn }) => {
+      console.clear()
       const [army1, army2] = armies;
       console.log(`Turn ${turn} completed`);
       console.log(`Knights HP: ${army1.units.reduce((acc, unit) => acc + unit.health, 0)} units`);

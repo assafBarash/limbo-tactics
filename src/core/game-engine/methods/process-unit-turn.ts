@@ -7,7 +7,8 @@ export const createProcessUnitTurn = (ctx: GameEngineContext) => {
 
     const attackAction = unit.findAvailableAction('attack');
     if (attackAction) {
-      const targets = ctx.board.getUnitsInRange(unit.position, attackAction.range);
+      const targets = ctx.board.getUnitsInRange(unit.position, attackAction.range)
+        .filter(target => target.health > 0);
       const target = unit.findEnemyTarget(targets);
       if (target) {
         unit.executeAttack(target, attackAction, ctx);
