@@ -1,4 +1,4 @@
-import { Unit } from '../../../types';
+import { Unit } from '../../unit/types';
 import { GameBoardContext } from '../types';
 
 export const createGetAllUnits = ({ grid }: GameBoardContext) => {

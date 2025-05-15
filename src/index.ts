@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Army, UnitType, Unit, Position } from './types';
 import { GameEngine } from './core/game-engine/service';
 import { GameBoard } from './core/game-board/service';
+import { Army, UnitType, Unit } from './core/unit/types';
+import { Position } from './core/game-board/types';
 import { createUnit } from './core/unit';
 
 // Army factory

@@ -1,5 +1,7 @@
-import { Position, Unit } from '../../../types';
+import { Position } from '../types';
+import { Unit } from '../../unit/types';
 import { GameBoardContext } from '../types';
+import { createGetUnit } from './get-unit';
 
 const calculateDistance = (pos1: Position, pos2: Position): number =>
   Math.sqrt(

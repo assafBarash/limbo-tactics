@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Unit, UnitData, Action, ActionData, ActionType, Position } from '../../types';
+import { Unit, UnitData, Action, ActionData, ActionType } from './types';
+import { Position } from '../game-board/types';
 import { GameEngineContext } from '../game-engine/types';
 
 // Type for unit state without behavior methods
@@ -44,8 +45,7 @@ export const createUnit = (unitData: UnitData, armyId: string): Unit => {
 
   const handleDeath = (ctx: GameEngineContext): void => {
     if (state.health <= 0 && state.position) {
-      ctx.board.moveUnit(state as Unit, state.position);
-      state.position = null;
+      ctx.board.removeUnit(state as Unit);
     }
   };
 
@@ -60,7 +60,7 @@ export const createUnit = (unitData: UnitData, armyId: string): Unit => {
       target
     });
 
-    handleDeath(ctx);
+    target.handleDeath(ctx);
   };
 
   const executeMove = (newPos: Position, action: Action, ctx: GameEngineContext): void => {

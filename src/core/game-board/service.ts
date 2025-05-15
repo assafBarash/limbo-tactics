@@ -1,8 +1,9 @@
-import { Position, Unit, Grid, BoardDimensions } from '../../types';
-import { GameBoardContext, GameBoardService } from './types';
+import { Unit } from '../unit/types';
+import { Position, Grid, BoardDimensions, GameBoardContext, GameBoardService } from './types';
 import { createGetUnit } from './methods/get-unit';
 import { createPlaceUnit } from './methods/place-unit';
 import { createMoveUnit } from './methods/move-unit';
+import { createRemoveUnit } from './methods/remove-unit';
 import { createGetUnitsInRange } from './methods/get-units-in-range';
 import { createGetRandomEmptyPosition } from './methods/get-random-empty-position';
 import { createGetAllUnits } from './methods/get-all-units';
@@ -28,6 +29,7 @@ export const GameBoard = (config: { dimensions: BoardDimensions }): GameBoardSer
     getUnit: createGetUnit(ctx),
     placeUnit: createPlaceUnit(ctx),
     moveUnit,
+    removeUnit: createRemoveUnit(ctx),
     getUnitsInRange,
     getRandomEmptyPosition,
     getAllUnits: createGetAllUnits(ctx),

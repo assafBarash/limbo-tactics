@@ -1,4 +1,4 @@
-import { Unit } from '../../../types';
+import { Unit } from '../../unit/types';
 import { GameEngineContext } from '../types';
 
 export const createProcessUnitTurn = (ctx: GameEngineContext) => {

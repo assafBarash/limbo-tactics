@@ -1,4 +1,18 @@
-import { Army, GameBoardService, Unit, Action, Position, Grid } from '../../types';
+import { Unit, Action, Army } from '../unit/types';
+import { Position, Grid } from '../game-board/types';
+import { GameBoardService } from '../game-board/types';
+
+export type UnitActionEvent = {
+  unit: Unit;
+  action: Action;
+  target: Unit | Position;
+};
+
+export type TickEndState = {
+  armies: readonly [Army, Army];
+  board: Grid;
+  turn: number;
+};
 
 export type GameEngineListeners = {
   onUnitAction: (event: UnitActionEvent) => void;
@@ -17,15 +31,11 @@ export type GameState = {
   turn: number;
 };
 
-export type UnitActionEvent = {
-  unit: Unit;
-  action: Action;
-  target: Unit | Position;
-};
-
-export type TickEndState = {
-  armies: readonly [Army, Army];
+export type BattleState = {
+  armies: Army[];
   board: Grid;
+  isComplete: boolean;
+  winner: Army | null;
   turn: number;
 };
 
