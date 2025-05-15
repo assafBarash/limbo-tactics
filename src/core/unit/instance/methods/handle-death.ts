@@ -4,9 +4,7 @@ import { UnitContext } from '../types';
 
 export const createHandleDeath = ({ state }: UnitContext) => {
   return (ctx: GameEngineContext): void => {
-    if (state.health <= 0) {
-        console.log('## handle death of', state.type);
-        
+    if (state.health <= 0 && state.position) {
       ctx.board.removeUnit(state as Unit);
     }
   };
