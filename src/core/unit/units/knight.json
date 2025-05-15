@@ -1,0 +1,20 @@
+{
+  "type": "knight",
+  "health": 30,
+  "actions": [
+    {
+      "id": "knight_attack",
+      "type": "attack",
+      "range": 1,
+      "value": 5,
+      "cooldownTime": 1200
+    },
+    {
+      "id": "knight_move",
+      "type": "move",
+      "range": 2,
+      "value": 0,
+      "cooldownTime": 1500
+    }
+  ]
+} 

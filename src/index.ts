@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Army, UnitType, Unit, Position } from './types';
 import { GameEngine } from './core/game-engine/service';
 import { GameBoard } from './core/game-board/service';
-import { createUnit } from './core/unit/factory';
+import { createUnit } from './core/unit';
 
 // Army factory
 export const createArmy = (unitTypes: UnitType[]): Army => {
@@ -31,8 +31,8 @@ const game = GameEngine({
     onTickEnd: ({ armies, board, turn }) => {
       const [army1, army2] = armies;
       console.log(`Turn ${turn} completed`);
-      console.log(`Army 1 HP: ${army1.units.reduce((acc, unit) => acc + unit.health, 0)} units`);
-      console.log(`Army 2 HP: ${army2.units.reduce((acc, unit) => acc + unit.health, 0)} units`);
+      console.log(`Knights HP: ${army1.units.reduce((acc, unit) => acc + unit.health, 0)} units`);
+      console.log(`Archers HP: ${army2.units.reduce((acc, unit) => acc + unit.health, 0)} units`);
     }
   }
 });

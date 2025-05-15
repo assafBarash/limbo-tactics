@@ -1,0 +1,20 @@
+{
+  "type": "archer",
+  "health": 20,
+  "actions": [
+    {
+      "id": "archer_attack",
+      "type": "attack",
+      "range": 3,
+      "value": 3,
+      "cooldownTime": 1000
+    },
+    {
+      "id": "archer_move",
+      "type": "move",
+      "range": 2,
+      "value": 0,
+      "cooldownTime": 2000
+    }
+  ]
+} 

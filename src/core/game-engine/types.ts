@@ -1,5 +1,4 @@
-import { Army, Unit, Action, Position, Grid } from '../../types';
-import { GameBoardService } from '../game-board/types';
+import { Army, GameBoardService, Unit, Action, Position, Grid } from '../../types';
 
 export type GameEngineListeners = {
   onUnitAction: (event: UnitActionEvent) => void;
