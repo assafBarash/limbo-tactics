@@ -1,12 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
-import { IUnit, UnitData, UnitState } from '../types';
-import {
-  createGetAvailableAction,
-  createGetEnemyTarget,
-  createExecuteAttack,
-  createExecuteMove,
-  createHandleDeath,
-} from './methods';
+import { IUnit, UnitData } from '../types';
+import { UnitContext, UnitState } from './types';
+import { createFindAvailableAction } from './methods/find-available-action';
+import { createFindEnemyTarget } from './methods/find-enemy-target';
+import { createExecuteAttack } from './methods/execute-attack';
+import { createExecuteMove } from './methods/execute-move';
+import { createHandleDeath } from './methods/handle-death';
 
 export const createUnit = (unitData: UnitData, armyId: string): IUnit => {
   const state: UnitState = {
@@ -25,12 +24,12 @@ export const createUnit = (unitData: UnitData, armyId: string): IUnit => {
     })),
   };
 
-  const ctx = { state };
+  const ctx: UnitContext = { state };
 
   return {
     ...state,
-    getAvailableAction: createGetAvailableAction(ctx),
-    getEnemyTarget: createGetEnemyTarget(ctx),
+    findAvailableAction: createFindAvailableAction(ctx),
+    findEnemyTarget: createFindEnemyTarget(ctx),
     executeAttack: createExecuteAttack(ctx),
     executeMove: createExecuteMove(ctx),
     handleDeath: createHandleDeath(ctx),

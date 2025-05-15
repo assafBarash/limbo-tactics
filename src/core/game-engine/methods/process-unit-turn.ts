@@ -1,13 +1,14 @@
-import { Unit } from '../../units/types';
+import { IUnit } from '../../units/types';
 import { GameEngineContext } from '../types';
 
 export const createProcessUnitTurn = (ctx: GameEngineContext) => {
-  return (unit: Unit): void => {
+  return (unit: IUnit): void => {
     if (!unit.position || unit.health <= 0) return;
 
     const attackAction = unit.findAvailableAction('attack');
     if (attackAction) {
-      const targets = ctx.board.getUnitsInRange(unit.position, attackAction.range)
+      const targets = ctx.board
+        .getUnitsInRange(unit.position, attackAction.range)
         .filter(target => target.health > 0);
       const target = unit.findEnemyTarget(targets);
       if (target) {
@@ -24,4 +25,4 @@ export const createProcessUnitTurn = (ctx: GameEngineContext) => {
       }
     }
   };
-}; 
+};

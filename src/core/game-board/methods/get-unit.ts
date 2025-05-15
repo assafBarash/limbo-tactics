@@ -1,5 +1,5 @@
 import { Position } from '../types';
-import { Unit } from '../../units/types';
+import { IUnit } from '../../units/types';
 import { GameBoardContext } from '../types';
 
 export const createGetUnit = ({ grid, dimensions }: GameBoardContext) => {
@@ -11,8 +11,6 @@ export const createGetUnit = ({ grid, dimensions }: GameBoardContext) => {
     position.z >= 0 &&
     position.z < 2;
 
-  return (position: Position): Unit | null =>
-    isValidPosition(position)
-      ? grid[position.x][position.y][position.z]
-      : null;
-}; 
+  return (position: Position): IUnit | null =>
+    isValidPosition(position) ? grid[position.x][position.y][position.z] : null;
+};

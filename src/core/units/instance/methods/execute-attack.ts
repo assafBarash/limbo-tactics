@@ -1,5 +1,6 @@
-import { IUnit, Action, UnitContext } from '../../types';
+import { IUnit, Action } from '../../types';
 import { GameEngineContext } from '../../../game-engine/types';
+import { UnitContext } from '../types';
 
 const updateActionCooldown = (action: Action): void => {
   action.cooldown.lastUsed = Date.now();

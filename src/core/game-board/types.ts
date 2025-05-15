@@ -1,4 +1,4 @@
-import { Unit } from '../units/types';
+import { IUnit } from '../units/types';
 
 export type Position = {
   x: number;
@@ -6,7 +6,7 @@ export type Position = {
   z: number;
 };
 
-export type Grid = (Unit | null)[][][];
+export type Grid = (IUnit | null)[][][];
 
 export type BoardDimensions = {
   width: number;
@@ -19,12 +19,12 @@ export type GameBoardContext = {
 };
 
 export type GameBoardService = {
-  getUnit: (position: Position) => Unit | null;
-  placeUnit: (unit: Unit, position: Position) => boolean;
-  moveUnit: (unit: Unit, position: Position) => boolean;
-  removeUnit: (unit: Unit) => boolean;
-  getUnitsInRange: (from: Position, range: number) => Unit[];
+  getUnit: (position: Position) => IUnit | null;
+  placeUnit: (unit: IUnit, position: Position) => boolean;
+  moveUnit: (unit: IUnit, position: Position) => boolean;
+  removeUnit: (unit: IUnit) => boolean;
+  getUnitsInRange: (from: Position, range: number) => IUnit[];
   getRandomEmptyPosition: (from?: Position, range?: number) => Position | null;
-  getAllUnits: () => Unit[];
+  getAllUnits: () => IUnit[];
   getState: () => { grid: Grid };
-}; 
+};

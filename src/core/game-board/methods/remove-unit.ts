@@ -1,11 +1,11 @@
-import { Unit } from '../../units/types';
+import { IUnit } from '../../units/types';
 import { GameBoardContext } from '../types';
 import { createGetUnit } from './get-unit';
 
 export const createRemoveUnit = (ctx: GameBoardContext) => {
   const getUnit = createGetUnit(ctx);
 
-  return (unit: Unit): boolean => {
+  return (unit: IUnit): boolean => {
     // If unit has no position or is not on the board, nothing to do
     if (!unit.position) return false;
 
@@ -18,4 +18,4 @@ export const createRemoveUnit = (ctx: GameBoardContext) => {
     unit.position = null;
     return true;
   };
-}; 
+};

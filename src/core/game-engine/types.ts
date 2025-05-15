@@ -1,11 +1,11 @@
-import { Unit, Action, Army } from '../units/types';
+import { IUnit, Action, Army } from '../units/types';
 import { Position, Grid } from '../game-board/types';
 import { GameBoardService } from '../game-board/types';
 
 export type UnitActionEvent = {
-  unit: Unit;
+  unit: IUnit;
   action: Action;
-  target: Unit | Position;
+  target: IUnit | Position;
 };
 
 export type TickEndState = {
@@ -42,4 +42,4 @@ export type BattleState = {
 export type GameEngineService = {
   start: () => void;
   getState: () => GameState;
-}; 
+};

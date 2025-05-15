@@ -32,7 +32,14 @@ export type UnitData = {
   actions: ActionData[];
 };
 
-export interface Unit {
+export type IUnit = UnitState & UnitActions;
+
+export type Army = {
+  id: string;
+  units: IUnit[];
+};
+
+export type UnitState = {
   id: string;
   type: UnitType;
   position: Position | null;
@@ -40,16 +47,16 @@ export interface Unit {
   actions: Action[];
   armyId: string;
   lastAttackTime: number;
+};
 
-  // Unit behaviors
-  findAvailableAction: (type: ActionType) => Action | null;
-  findEnemyTarget: (targets: Unit[]) => Unit | null;
-  executeAttack: (target: Unit, action: Action, ctx: GameEngineContext) => void;
+export type UnitActions = {
+  getAvailableAction: (type: ActionType) => Action | null;
+  getEnemyTarget: (targets: IUnit[]) => IUnit | null;
+  executeAttack: (target: IUnit, action: Action, ctx: GameEngineContext) => void;
   executeMove: (newPos: Position, action: Action, ctx: GameEngineContext) => void;
   handleDeath: (ctx: GameEngineContext) => void;
-}
+};
 
-export type Army = {
-  id: string;
-  units: Unit[];
-}; 
+export type UnitContext = {
+  state: UnitState;
+};

@@ -8,7 +8,9 @@
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "debug": "node --inspect-brk -r ts-node/register src/index.ts"
+    "debug": "node --inspect-brk -r ts-node/register src/index.ts",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "keywords": [],
   "author": "",
@@ -16,10 +18,11 @@
   "devDependencies": {
     "@types/node": "^20.11.24",
     "@types/uuid": "^9.0.8",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "uuid": "^9.0.1"
   }
-} 
+}
