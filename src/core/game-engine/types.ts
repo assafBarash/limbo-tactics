@@ -23,12 +23,15 @@ export type GameEngineContext = {
   board: GameBoardService;
   armies: [Army, Army];
   listeners: GameEngineListeners;
+  turn?: number;
 };
 
 export type GameState = {
   isComplete: boolean;
   winner: Army | null;
   turn: number;
+  board: Grid;
+  armies: [Army, Army];
 };
 
 export type BattleState = {

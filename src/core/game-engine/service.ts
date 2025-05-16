@@ -6,10 +6,11 @@ export const GameEngine = (ctx: GameEngineContext): GameEngineService => {
     isComplete: false,
     winner: null,
     turn: 0,
+    board: ctx.board.getState().grid,
+    armies: ctx.armies,
   };
 
   const timeline: GameState[] = [];
-  const processUnitTurn = createProcessUnitTurn(ctx);
 
   const placeUnits = (state: GameState): GameState => {
     ctx.armies.forEach(army => {
@@ -20,35 +21,49 @@ export const GameEngine = (ctx: GameEngineContext): GameEngineService => {
         }
       });
     });
-    return state;
+    return {
+      ...state,
+      board: ctx.board.getState().grid,
+    };
   };
 
   const checkWinCondition = (state: GameState): GameState => {
+    let newState = { ...state };
     ctx.armies.forEach((army, index) => {
       const hasLivingUnits = army.units.some(unit => unit.health > 0);
       if (!hasLivingUnits) {
-        state = {
-          ...state,
+        newState = {
+          ...newState,
           isComplete: true,
           winner: ctx.armies[(index + 1) % 2],
         };
       }
     });
-    return state;
+    return newState;
   };
 
-  const processUnits = (state: GameState): GameState => {
+  const processUnits = (state: GameState, currentTurn: number): GameState => {
     if (state.isComplete) return state;
 
-    [...ctx.armies[0].units, ...ctx.armies[1].units].forEach(processUnitTurn);
-    return state;
+    const turnContext: GameEngineContext = {
+      ...ctx,
+      turn: currentTurn,
+    };
+    const processTurnWithContext = createProcessUnitTurn(turnContext);
+    [...ctx.armies[0].units, ...ctx.armies[1].units].forEach(processTurnWithContext);
+
+    return {
+      ...state,
+      board: ctx.board.getState().grid,
+      armies: ctx.armies,
+    };
   };
 
   const processTurn = (state: GameState): GameState => {
     if (state.isComplete) return state;
 
     // Process units
-    state = processUnits(state);
+    state = processUnits(state, state.turn);
 
     // Check win condition
     state = checkWinCondition(state);

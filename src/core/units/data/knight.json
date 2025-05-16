@@ -7,14 +7,14 @@
       "type": "attack",
       "range": 1,
       "value": 5,
-      "cooldownTime": 1200
+      "cooldownTime": 2
     },
     {
       "id": "knight_move",
       "type": "move",
       "range": 2,
       "value": 0,
-      "cooldownTime": 1500
+      "cooldownTime": 1
     }
   ]
 } 

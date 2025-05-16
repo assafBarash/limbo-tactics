@@ -7,14 +7,14 @@
       "type": "attack",
       "range": 3,
       "value": 3,
-      "cooldownTime": 1000
+      "cooldownTime": 3
     },
     {
       "id": "archer_move",
       "type": "move",
       "range": 2,
       "value": 0,
-      "cooldownTime": 2000
+      "cooldownTime": 1
     }
   ]
 } 

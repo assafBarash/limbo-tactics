@@ -1,11 +1,10 @@
-import { Action, ActionType, UnitContext, UnitState } from '../../types';
+import { Action, ActionType, UnitContext } from '../../types';
 
-const isActionAvailable = (action: Action): boolean => {
-  const now = Date.now();
-  return now - action.cooldown.lastUsed >= action.cooldown.cooldownTime;
+const isActionAvailable = (action: Action, currentTurn: number = 0): boolean => {
+  return currentTurn - action.cooldown.lastUsedTurn >= action.cooldown.cooldownTurns;
 };
 
 export const createGetAvailableAction = ({ state }: UnitContext) => {
-  return (type: ActionType): Action | null =>
-    state.actions.find(action => action.type === type && isActionAvailable(action)) ?? null;
+  return (type: ActionType, turn: number = 0): Action | null =>
+    state.actions.find(action => action.type === type && isActionAvailable(action, turn)) ?? null;
 };

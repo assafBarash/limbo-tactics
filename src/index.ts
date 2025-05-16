@@ -26,18 +26,9 @@ const game = GameEngine({
   armies: [army1, army2],
   listeners: {
     onUnitAction: ({ unit, action, target }) => {
-      const targetDesc = (target as IUnit).id
-        ? `unit ${(target as IUnit).id}`
-        : `position (${(target as Position).x}, ${(target as Position).y})`;
-      // console.log(`Unit ${unit.id} used ${action.type} on ${targetDesc}`);
+      console.log(`${unit.type} from army ${unit.armyId} used ${action.type}`);
     },
-    onTickEnd: ({ armies, board, turn }) => {
-      console.clear();
-      const [army1, army2] = armies;
-      console.log(`Turn ${turn} completed`);
-      console.log(`Knights HP: ${army1.units.reduce((acc, unit) => acc + unit.health, 0)} units`);
-      console.log(`Archers HP: ${army2.units.reduce((acc, unit) => acc + unit.health, 0)} units`);
-    },
+    onTickEnd: ({ armies, board, turn }) => {},
   },
 });
 
@@ -45,4 +36,5 @@ console.log('## game start');
 
 game.start();
 
-console.log('## game end');
+const [lastState] = game.getGameTimeline().reverse();
+console.log('## game end', lastState.winner);

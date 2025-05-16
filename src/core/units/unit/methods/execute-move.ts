@@ -2,8 +2,8 @@ import { Action, IUnit, UnitContext } from '../../../units/types';
 import { Position } from '../../../game-board/types';
 import { GameEngineContext } from '../../../game-engine/types';
 
-const updateActionCooldown = (action: Action): void => {
-  action.cooldown.lastUsed = Date.now();
+const updateActionCooldown = (action: Action, currentTurn: number = 0): void => {
+  action.cooldown.lastUsedTurn = currentTurn;
 };
 
 export const createExecuteMove = ({ state }: UnitContext) => {
@@ -15,7 +15,7 @@ export const createExecuteMove = ({ state }: UnitContext) => {
 
     // Only update cooldown and fire event if position changed
     if (state.position !== initialPosition && state.position === newPos) {
-      updateActionCooldown(action);
+      updateActionCooldown(action, ctx.turn);
       ctx.listeners.onUnitAction({
         unit: state as IUnit,
         action,

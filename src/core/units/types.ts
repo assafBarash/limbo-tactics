@@ -1,13 +1,13 @@
 import type { Position } from '../game-board/types';
-import type { GameEngineContext } from '../game-engine/types';
+import type { GameEngineContext, GameState } from '../game-engine/types';
 
 export type UnitType = 'knight' | 'archer';
 
 export type ActionType = 'move' | 'attack' | 'buff' | 'debuff';
 
 export type Cooldown = {
-  lastUsed: number;
-  cooldownTime: number;
+  lastUsedTurn: number;
+  cooldownTurns: number;
 };
 
 export type ActionData = {
@@ -46,11 +46,10 @@ export type UnitState = {
   health: number;
   actions: Action[];
   armyId: string;
-  lastAttackTime: number;
 };
 
 export type UnitActions = {
-  getAvailableAction: (type: ActionType) => Action | null;
+  getAvailableAction: (type: ActionType, turn?: number) => Action | null;
   getEnemyTarget: (targets: IUnit[]) => IUnit | null;
   executeAttack: (target: IUnit, action: Action, ctx: GameEngineContext) => void;
   executeMove: (newPos: Position, action: Action, ctx: GameEngineContext) => void;

@@ -14,13 +14,12 @@ export const createUnit = (unitData: UnitData, armyId: string): IUnit => {
     type: unitData.type,
     position: null,
     health: unitData.health,
-    lastAttackTime: 0,
     armyId,
     actions: unitData.actions.map(action => ({
       ...action,
       cooldown: {
-        lastUsed: 0,
-        cooldownTime: action.cooldownTime,
+        lastUsedTurn: 0,
+        cooldownTurns: action.cooldownTime,
       },
     })),
   };
