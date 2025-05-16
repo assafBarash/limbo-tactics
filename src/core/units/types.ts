@@ -3,7 +3,7 @@ import type { GameEngineContext, GameState } from '../game-engine/types';
 
 export type UnitType = 'knight' | 'archer';
 
-export type ActionType = 'move' | 'attack' | 'buff' | 'debuff';
+export type ActionType = 'move' | 'attack';
 
 export type Cooldown = {
   lastUsedTurn: number;

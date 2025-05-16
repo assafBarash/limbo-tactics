@@ -34,14 +34,6 @@ export type GameState = {
   armies: [Army, Army];
 };
 
-export type BattleState = {
-  armies: Army[];
-  board: Grid;
-  isComplete: boolean;
-  winner: Army | null;
-  turn: number;
-};
-
 export type GameEngineService = {
   start: () => void;
   getGameTimeline: () => GameState[];
