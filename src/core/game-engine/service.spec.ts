@@ -45,18 +45,15 @@ describe('GameEngine', () => {
         unit.health = 0;
       });
 
-      // Start the game
+      // Process a single turn
       engine.start();
 
-      // Fast-forward timers to process the first turn
-      jest.runOnlyPendingTimers();
-
-      // Get game state
-      const state = engine.getState();
+      const [state] = engine.getGameTimeline();
 
       // Verify game ended with army2 as winner
       expect(state.isComplete).toBe(true);
       expect(state.winner).toBe(army2);
+      expect(state.turn).toBe(1);
     });
 
     it('should not end game when both armies have living units', () => {
@@ -81,18 +78,42 @@ describe('GameEngine', () => {
       army1.units[0].health = 0;
       army2.units[0].health = 0;
 
-      // Start the game
       engine.start();
 
-      // Fast-forward timers to process the first turn
-      jest.runOnlyPendingTimers();
-
-      // Get game state
-      const state = engine.getState();
+      // Process a single turn
+      const [state] = engine.getGameTimeline();
 
       // Verify game continues
       expect(state.isComplete).toBe(false);
       expect(state.winner).toBe(null);
+      expect(state.turn).toBe(1);
+    });
+
+    it('should maintain game state across multiple turns', () => {
+      // Setup armies
+      const army1 = createTestArmy(['knight']);
+      const army2 = createTestArmy(['knight']);
+
+      // Setup board
+      const board = GameBoard({ dimensions: { width: 10, depth: 10 } });
+
+      // Setup game engine
+      const engine = GameEngine({
+        board,
+        armies: [army1, army2],
+        listeners: {
+          onUnitAction: () => {},
+          onTickEnd: () => {},
+        },
+      });
+
+      // Process first turn - all units alive
+      engine.start();
+      const [state] = engine.getGameTimeline();
+
+      expect(state.isComplete).toBe(true);
+      expect(state.winner).toBe(army2);
+      expect(state.turn).toBe(2);
     });
   });
 });

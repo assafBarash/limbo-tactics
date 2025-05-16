@@ -21,7 +21,7 @@ export type GameEngineListeners = {
 
 export type GameEngineContext = {
   board: GameBoardService;
-  armies: readonly [Army, Army];
+  armies: [Army, Army];
   listeners: GameEngineListeners;
 };
 
@@ -41,5 +41,5 @@ export type BattleState = {
 
 export type GameEngineService = {
   start: () => void;
-  getState: () => GameState;
+  getGameTimeline: () => GameState[];
 };

@@ -2,15 +2,16 @@ import { GameEngineContext, GameState, GameEngineService } from './types';
 import { createProcessUnitTurn } from './methods/process-unit-turn';
 
 export const GameEngine = (ctx: GameEngineContext): GameEngineService => {
-  const state: GameState = {
+  const initialState: GameState = {
     isComplete: false,
     winner: null,
-    turn: 0
+    turn: 0,
   };
 
+  const timeline: GameState[] = [];
   const processUnitTurn = createProcessUnitTurn(ctx);
 
-  const placeUnits = (): void => {
+  const placeUnits = (state: GameState): GameState => {
     ctx.armies.forEach(army => {
       army.units.forEach(unit => {
         const position = ctx.board.getRandomEmptyPosition();
@@ -19,47 +20,66 @@ export const GameEngine = (ctx: GameEngineContext): GameEngineService => {
         }
       });
     });
+    return state;
   };
 
-  const checkWinCondition = (): void => {
+  const checkWinCondition = (state: GameState): GameState => {
     ctx.armies.forEach((army, index) => {
       const hasLivingUnits = army.units.some(unit => unit.health > 0);
       if (!hasLivingUnits) {
-        state.isComplete = true;
-        state.winner = ctx.armies[(index + 1) % 2];
+        state = {
+          ...state,
+          isComplete: true,
+          winner: ctx.armies[(index + 1) % 2],
+        };
       }
     });
+    return state;
   };
 
-  const processTurn = (): void => {
-    if (state.isComplete) return;
+  const processUnits = (state: GameState): GameState => {
+    if (state.isComplete) return state;
 
     [...ctx.armies[0].units, ...ctx.armies[1].units].forEach(processUnitTurn);
-    checkWinCondition();
-    state.turn++;
+    return state;
+  };
 
+  const processTurn = (state: GameState): GameState => {
+    if (state.isComplete) return state;
+
+    // Process units
+    state = processUnits(state);
+
+    // Check win condition
+    state = checkWinCondition(state);
+
+    // Increment counters
+    state = {
+      ...state,
+      turn: state.turn + 1,
+    };
+
+    // Fire events
     ctx.listeners.onTickEnd({
       armies: ctx.armies,
       board: ctx.board.getState().grid,
-      turn: state.turn
+      turn: state.turn,
     });
-  };
 
-  const startGameLoop = (tickInterval: number): void => {
-    const tick = () => {
-      processTurn();
-      if (!state.isComplete) {
-        setTimeout(tick, tickInterval);
-      }
-    };
-    tick();
+    return state;
   };
 
   return {
     start: () => {
-      placeUnits();
-      startGameLoop(100);
+      let currentState = placeUnits(initialState);
+      timeline.push(currentState);
+
+      while (!currentState.isComplete) {
+        currentState = processTurn(currentState);
+        timeline.push(currentState);
+      }
     },
-    getState: () => ({ ...state })
+
+    getGameTimeline: () => [...timeline],
   };
-}; 
+};
