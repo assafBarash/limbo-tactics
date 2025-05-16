@@ -1,4 +1,4 @@
-import { Action, IUnit, UnitContext } from '../../../units/types';
+import { Action, IUnit, UnitContext } from '../../types';
 import { Position } from '../../../game-board/types';
 import { GameEngineContext } from '../../../game-engine/types';
 
